@@ -61,15 +61,17 @@ const Home = () => {
             <style>{`
                 .home-page { padding-bottom: 4rem; }
                 .hero-section {
-                    background-image: url('/hero-bg.png');
+                    /* Updated Banner Image */
+                    background-image: url('/hero-banner.png');
                     background-size: cover;
                     background-position: center;
-                    padding: 6rem 0;
+                    padding: 8rem 0; /* More padding for bigger hero */
                     text-align: center;
                     margin-bottom: 0;
                     position: relative;
+                    color: #2c3e50;
                 }
-                /* Overlay for contrast */
+                /* Stronger Blur Overlay */
                 .hero-section::before {
                     content: '';
                     position: absolute;
@@ -77,8 +79,9 @@ const Home = () => {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: rgba(255, 255, 255, 0.6);
-                    backdrop-filter: blur(8px);
+                    background: rgba(255, 255, 255, 0.4); /* Less opaque to see image */
+                    backdrop-filter: blur(12px); /* Strong blur */
+                    -webkit-backdrop-filter: blur(12px);
                     z-index: 0;
                 }
                 .hero-section .container {
@@ -88,37 +91,42 @@ const Home = () => {
                 
                 h1 {
                     color: #2c3e50;
-                    text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+                    font-size: 3rem;
+                    text-shadow: 0 4px 20px rgba(255,255,255,0.8);
+                    margin-bottom: 1.5rem;
                 }
 
                 .hero-subtitle {
-                    font-size: 1.3rem;
-                    color: #2d3436;
-                    max-width: 600px;
-                    margin: 1.5rem auto 2.5rem;
+                    font-size: 1.5rem;
+                    color: #34495e;
+                    max-width: 700px;
+                    margin: 0 auto 3rem;
                     font-weight: 500;
+                    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
                 }
                 
                 .awareness-box {
-                    background: rgba(255, 255, 255, 0.7);
-                    border-left: 4px solid var(--color-primary);
-                    padding: 1.5rem;
-                    max-width: 700px;
-                    margin: 0 auto 3rem;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                    background: rgba(255, 255, 255, 0.85); /* More opaque */
+                    border-left: 5px solid var(--color-primary);
+                    padding: 2rem;
+                    max-width: 800px;
+                    margin: 0 auto 3.5rem;
+                    border-radius: 12px;
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+                    backdrop-filter: blur(5px);
                 }
                 .awareness-box p {
                     font-style: italic;
-                    color: #2d3436;
-                    font-size: 1.05rem;
+                    color: #2c3e50;
+                    font-size: 1.15rem;
                     line-height: 1.6;
                     margin: 0;
+                    font-weight: 500;
                 }
 
                 .hero-actions {
                     display: flex;
-                    gap: 1rem;
+                    gap: 1.5rem;
                     justify-content: center;
                     flex-wrap: wrap;
                 }
@@ -128,61 +136,64 @@ const Home = () => {
                 }
                 .info-grid {
                     display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                     gap: 2rem;
                 }
                 .info-card {
                     padding: 2rem;
                     background: #f8f9fa;
-                    border-radius: 12px;
+                    border-radius: 16px;
                     text-align: left;
-                    transition: transform 0.2s;
+                    transition: transform 0.3s, box-shadow 0.3s;
+                    border: 1px solid #edf2f7;
                 }
                 .info-card:hover { 
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                    transform: translateY(-8px);
+                    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
                 }
                 .icon-main {
                     color: var(--color-primary);
-                    margin-bottom: 1rem;
+                    margin-bottom: 1.2rem;
                 }
                 .info-card h3 {
                     margin-bottom: 1rem;
                     color: #2c3e50;
-                    font-size: 1.2rem;
+                    font-size: 1.3rem;
                 }
                 .info-card p {
                     color: #636e72;
                     line-height: 1.6;
-                    font-size: 0.95rem;
+                    font-size: 1rem;
                 }
                 .btn {
                     display: inline-flex;
                     align-items: center;
                     gap: 0.5rem;
-                    padding: 0.8rem 1.5rem;
-                    border-radius: 30px;
-                    font-weight: 600;
+                    padding: 1rem 2rem;
+                    border-radius: 50px;
+                    font-weight: 700;
                     text-decoration: none;
-                    transition: all 0.2s;
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                    transition: all 0.3s;
                 }
                 .btn-primary {
                     background: var(--color-primary);
                     color: white;
+                    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
                 }
                 .btn-primary:hover {
                     background: #27ae60;
-                    transform: translateY(-2px);
+                    transform: translateY(-3px);
+                    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.5);
                 }
                 .btn-secondary {
-                    background: white;
+                    background: rgba(255,255,255,0.9);
                     color: var(--color-primary);
                     border: 2px solid var(--color-primary);
                 }
                 .btn-secondary:hover {
                     background: #eafaf1;
-                    transform: translateY(-2px);
+                    transform: translateY(-3px);
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                 }
             `}</style>
         </div>
