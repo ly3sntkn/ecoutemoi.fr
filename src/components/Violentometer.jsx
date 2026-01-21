@@ -61,7 +61,7 @@ const Violentometer = () => {
   return (
     <section id="violentometer" className="vio-section">
       <div className="container center-container">
-        <h2>Le Violentomètre</h2>
+        {/* Title removed to avoid duplication with parent page */}
         <p className="intro">Déplace le curseur pour évaluer ta situation.</p>
 
         <div className="gauge-slider-wrapper">
@@ -101,9 +101,9 @@ const Violentometer = () => {
       </div>
 
       <style>{`
-                .vio-section { padding: 4rem 0; background: #fff; }
+                .vio-section { padding: 2rem 0 4rem; background: #fff; }
                 .center-container { text-align: center; max-width: 800px; margin: 0 auto; }
-                .intro { color: #636e72; margin-bottom: 3rem; }
+                .intro { color: #636e72; margin-bottom: 3rem; font-weight: 500; }
 
                 .gauge-slider-wrapper {
                     position: relative;
