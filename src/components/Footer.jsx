@@ -14,11 +14,7 @@ const Footer = () => {
               <p>Ce site est informatif et ne remplace pas un service d’urgence ou un suivi médical.</p>
             </div>
           </div>
-
-          <div className="footer-col">
-            <h4>En cas d'urgence</h4>
-            <p>Consultez notre page <Link to="/urgence" style={{ color: '#fdcb6e', textDecoration: 'underline' }}>Urgences</Link> pour tous les numéros d'aide.</p>
-          </div>
+          {/* Emergency numbers removed as requested */}
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
