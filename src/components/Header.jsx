@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <header className="site-header">
       <div className="container header-content">
-        <Link to="/" className="logo" onClick={closeMenu}>
+        <Link to="/accueil" className="logo" onClick={closeMenu}>
           <div className="logo-icon">
             <Heart size={20} fill="#6c5ce7" stroke="#6c5ce7" />
           </div>
@@ -19,7 +19,7 @@ const Header = () => {
         </Link>
 
         <nav className={`main-nav ${isMenuOpen ? 'open' : ''}`}>
-          <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu}>
+          <NavLink to="/accueil" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu}>
             Accueil
           </NavLink>
           <NavLink to="/comprendre" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'} onClick={closeMenu}>

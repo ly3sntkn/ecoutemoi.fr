@@ -1,56 +1,24 @@
 import React, { useState } from 'react';
 import { AlertCircle, Zap, Shield, ChevronRight } from 'lucide-react';
 
-const Violentometer = () => {
+const Violentometer = ({ levels, title }) => {
   const [level, setLevel] = useState(1); // 1-indexed
 
-  const levels = [
-    // GREEN - PROFITE
-    { text: "On te traite avec bienveillance", color: "#6ab04c", zone: "green" },
-    { text: "On respecte tes idées et tes décisions", color: "#6ab04c", zone: "green" },
-    { text: "On t'offre une ambiance d'écoute et de partage respectueuse", color: "#6ab04c", zone: "green" },
-    { text: "On croit dans ta capacité à faire carrière", color: "#6ab04c", zone: "green" },
-    { text: "On te fait des retours sur ton travail qui te permettent de l'améliorer", color: "#6ab04c", zone: "green" },
-    { text: "On te permet de développer tes compétences et ta confiance en toi", color: "#6ab04c", zone: "green" },
-    { text: "On te soutient dans tes perspectives de carrière", color: "#6ab04c", zone: "green" },
-    { text: "On te permet d’avoir un bon équilibre entre vie professionnelle et vie privée", color: "#6ab04c", zone: "green" },
-
-    // ORANGE - VIGILANCE
-    { text: "On affirme que le milieu est exempt de sexisme", color: "#f39c12", zone: "orange" },
-    { text: "On suggère que ta vie privée t'empêcherait de faire carrière", color: "#f39c12", zone: "orange" },
-    { text: "On te cantonne à des tâches supposées féminines", color: "#f39c12", zone: "orange" },
-    { text: "On sous-estime tes compétences", color: "#e67e22", zone: "orange" },
-    { text: "On te traite de manière condescendante", color: "#e67e22", zone: "orange" },
-    { text: "On invisibilise tes idées", color: "#e67e22", zone: "orange" },
-    { text: "On ne t'implique pas dans des projets stratégiques", color: "#d35400", zone: "orange" },
-    { text: "On rabaisse tes compétences en public", color: "#d35400", zone: "orange" },
-    { text: "On banalise les comportements harcelants", color: "#d35400", zone: "orange" },
-    { text: "On te ramène souvent à ton physique", color: "#c0392b", zone: "orange" },
-    { text: "On te fait occasionnellement des remarques ouvertement sexistes", color: "#c0392b", zone: "orange" },
-    { text: "On t'interpelle avec des termes peu adaptés aux relations professionnelles", color: "#c0392b", zone: "orange" },
-    { text: "On t'isole de tes collègues", color: "#c0392b", zone: "orange" },
-    { text: "On te pose des questions sur ta vie intime", color: "#c0392b", zone: "orange" },
-    { text: "On diffuse des rumeurs sexuelles à ton sujet", color: "#c0392b", zone: "orange" },
-
-    // RED - DANGER
-    { text: "On raconte des plaisanteries sexistes à longueur de journée", color: "#e74c3c", zone: "red" },
-    { text: "On te raconte des histoires à caractère sexuel qui te mettent mal à l'aise", color: "#e74c3c", zone: "red" },
-    { text: "On te fait des commentaires insultants ou blessants à connotation sexuelle", color: "#c0392b", zone: "red" },
-    { text: "On t'expose à du matériel à connotation sexuelle", color: "#c0392b", zone: "red" },
-    { text: "On te menace de représailles si tu dénonces des comportements violents", color: "#c0392b", zone: "red" },
-    { text: "On te fait des avances intimes malgré ton refus", color: "#962f2f", zone: "red" },
-    { text: "On te propose des avantages professionnels en échange de relations intimes", color: "#962f2f", zone: "red" },
-    { text: "On te fait subir des répercussions négatives pour avoir refusé des avances", color: "#962f2f", zone: "red" },
-    { text: "On s'arrange pour avoir des contacts physiques répétés avec toi qui te mettent mal à l'aise", color: "#962f2f", zone: "red" }
+  // Fallback if no specific levels are provided
+  const defaultLevels = [
+    { text: "Niveau 1", color: "#6ab04c", zone: "green" },
+    { text: "Niveau 5", color: "#f39c12", zone: "orange" },
+    { text: "Niveau 10", color: "#c0392b", zone: "red" }
   ];
 
-  const current = levels[level - 1];
+  const activeLevels = levels && levels.length > 0 ? levels : defaultLevels;
+  const current = activeLevels[level - 1];
 
   const getFeedback = (zone) => {
     switch (zone) {
-      case 'green': return { title: "PROFITE", msg: "Ton environnement est sain.", color: "#6ab04c", icon: Shield };
-      case 'orange': return { title: "VIGILANCE", msg: "Ce n'est pas normal, parles-en.", color: "#e67e22", icon: AlertCircle };
-      case 'red': return { title: "DANGER", msg: "Protège-toi, demande de l'aide.", color: "#c0392b", icon: Zap };
+      case 'green': return { title: "PROFITE", msg: "Tout va bien, la relation est saine.", color: "#6ab04c", icon: Shield };
+      case 'orange': return { title: "VIGILANCE", msg: "Dis Stop ! Ce n'est pas acceptable.", color: "#e67e22", icon: AlertCircle };
+      case 'red': return { title: "DANGER", msg: "Protège-toi, demande de l'aide immédiatement.", color: "#c0392b", icon: Zap };
       default: return null;
     }
   };
@@ -58,52 +26,61 @@ const Violentometer = () => {
   const feedback = getFeedback(current.zone);
   const Icon = feedback.icon;
 
+  // Reset level if data changes and out of bounds
+  if (!current) {
+    setLevel(1);
+    return null;
+  }
+
   return (
-    <section id="violentometer" className="vio-section">
-      <div className="container center-container">
-        {/* Title removed to avoid duplication with parent page */}
-        <p className="intro">Déplace le curseur pour évaluer ta situation.</p>
+    <section className="vio-instance">
+      {title && <h3 className="vio-title">{title}</h3>}
 
-        <div className="gauge-slider-wrapper">
-          <div className="slider-track">
-            <div className="track-bg"></div>
-            <input
-              type="range"
-              min="1"
-              max={levels.length}
-              value={level}
-              onChange={(e) => setLevel(parseInt(e.target.value))}
-              className="slider"
-              aria-label="Niveau de violence"
-            />
-          </div>
+      <div className="gauge-slider-wrapper">
+        <div className="slider-track">
+          <div className="track-bg"></div>
+          <input
+            type="range"
+            min="1"
+            max={activeLevels.length}
+            value={level}
+            onChange={(e) => setLevel(parseInt(e.target.value))}
+            className="slider"
+            aria-label="Niveau de violence"
+          />
+        </div>
 
-          <div className="labels">
-            <span>Sain</span>
-            <span>Vigilance</span>
-            <span>Danger</span>
-          </div>
+        <div className="labels">
+          <span>Sain</span>
+          <span>Vigilance</span>
+          <span>Danger</span>
+        </div>
 
-          <div className="dynamic-content">
-            <div className="level-number" style={{ color: current.color }}>{level}</div>
-            <div className="level-text">"{current.text}"</div>
-          </div>
+        <div className="dynamic-content">
+          <div className="level-number" style={{ color: current.color }}>{level}</div>
+          <div className="level-text">"{current.text}"</div>
+        </div>
 
-          <div className={`feedback-box zone-${current.zone}`}>
-            <div className="feedback-header">
-              <Icon size={24} />
-              <h3>{feedback.title}</h3>
-            </div>
-            <p>{feedback.msg}</p>
-            {current.zone === 'red' && <a href="/urgence" className="btn btn-sm btn-danger-invert">SOS Urgence</a>}
+        <div className={`feedback-box zone-${current.zone}`}>
+          <div className="feedback-header">
+            <Icon size={24} />
+            <h3>{feedback.title}</h3>
           </div>
+          <p>{feedback.msg}</p>
+          {current.zone === 'red' && <a href="/urgence" className="btn btn-sm btn-danger-invert">SOS Urgence</a>}
         </div>
       </div>
 
       <style>{`
-                .vio-section { padding: 2rem 0 4rem; background: #fff; }
-                .center-container { text-align: center; max-width: 800px; margin: 0 auto; }
-                .intro { color: #636e72; margin-bottom: 3rem; font-weight: 500; }
+                .vio-instance { background: #fff; padding: 1rem 0 3rem; border-bottom: 1px solid #f0f0f0; margin-bottom: 3rem; }
+                .vio-instance:last-child { border-bottom: none; }
+                
+                .vio-title {
+                    text-align: center;
+                    font-size: 1.5rem;
+                    color: #2c3e50;
+                    margin-bottom: 2rem;
+                }
 
                 .gauge-slider-wrapper {
                     position: relative;
@@ -189,6 +166,7 @@ const Violentometer = () => {
                     line-height: 1.4;
                     max-width: 600px;
                     font-style: italic;
+                    text-align: center;
                 }
 
                 .feedback-box {

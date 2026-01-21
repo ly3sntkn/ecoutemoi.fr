@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Header from './components/Header';
@@ -20,15 +20,24 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Base config for GitHub Pages
+const basename = '/ecoutemoi.fr';
+// Note: React Router basename should match the repo name for GH Pages if not rewriting URLs. 
+// However, since we are using HashRouter or BrowserRouter with correct config, let's rely on standard practice.
+// For GH Pages without custom domain, it usually needs basename.
+// But wait, the user's vite config has base: '/ecoutemoi.fr/'.
+// Let's assume standard BrowserRouter needs basename.
+
 function App() {
   return (
-    <Router>
+    <Router basename="/ecoutemoi.fr">
       <ScrollToTop />
       <div className="app-layout">
         <Header />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Navigate to="/accueil" replace />} />
+            <Route path="/accueil" element={<Home />} />
             <Route path="/comprendre" element={<Comprendre />} />
             <Route path="/soutien-psy" element={<SoutienPsy />} />
             <Route path="/urgence" element={<Urgence />} />
