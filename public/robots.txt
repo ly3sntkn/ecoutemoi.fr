@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ly3sntkn.github.io/ecoutemoi.fr/sitemap.xml

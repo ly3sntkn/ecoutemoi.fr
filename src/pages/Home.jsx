@@ -1,10 +1,19 @@
 import React from 'react';
 import { Shield, Lock, Users, Heart, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
     return (
         <div className="home-page fade-in">
+            <Helmet>
+                <title>Accueil | Écoute Moi - Soutien contre les violences</title>
+                <meta name="description" content="Écoute Moi : Espace bienveillant pour comprendre, s'interroger et trouver du soutien face aux violences conjugales, scolaires et intrafamiliales. 100% anonyme." />
+                <meta name="keywords" content="violence conjugale, harcèlement scolaire, aide, soutien, anonyme, écoute, violentomètre, 3919, 3018" />
+                <meta property="og:title" content="Écoute Moi - De l'aide existe" />
+                <meta property="og:description" content="Un espace pour comprendre ce que tu vis et trouver de l'aide. Anonyme et gratuit." />
+                <meta property="og:type" content="website" />
+            </Helmet>
             <section className="hero-section">
                 <div className="container">
                     <h1>Tu n’es pas seul(e). <br />De l’aide existe.</h1>

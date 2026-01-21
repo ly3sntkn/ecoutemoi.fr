@@ -47,7 +47,11 @@ const Urgence = () => {
 
     return (
         <div className="page-container page-fade-in">
-            <section className="section-header urgent-header">
+            <Helmet>
+                <title>Numéros d'Urgence | Écoute Moi - Aide Immédiate</title>
+                <meta name="description" content="Danger immédiat ? Appelez le 17, 112 ou 15. Victime de violences ? 3919, 3018, 119. Liste complète des numéros d'urgence gratuits." />
+            </Helmet>
+            <section className="section-header emergency-header">
                 <div className="container">
                     <h1>Numéros d'Urgence</h1>
                     <p className="subtitle">En cas de danger immédiat, n'hésite jamais à appeler.</p>

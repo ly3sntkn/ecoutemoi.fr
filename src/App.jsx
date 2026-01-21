@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
 
-// Pages
-import Home from './pages/Home';
-import Comprendre from './pages/Comprendre';
-import SoutienPsy from './pages/SoutienPsy';
-import Urgence from './pages/Urgence';
+// Lazy Load Pages for Performance
+const Home = lazy(() => import('./pages/Home'));
+const Comprendre = lazy(() => import('./pages/Comprendre'));
+const SoutienPsy = lazy(() => import('./pages/SoutienPsy'));
+const Urgence = lazy(() => import('./pages/Urgence'));
+
+// Loading Fallback Component
+const PageLoader = () => (
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+    <style>{`
+            .loader {
+                width: 48px;
+                height: 48px;
+                border: 5px solid #bdc3c7;
+                border-bottom-color: #6c5ce7;
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+            }
+            @keyframes rotation {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `}</style>
+    <span className="loader"></span>
+  </div>
+);
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -20,52 +44,48 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Base config for GitHub Pages
-const basename = '/ecoutemoi.fr';
-// Note: React Router basename should match the repo name for GH Pages if not rewriting URLs. 
-// However, since we are using HashRouter or BrowserRouter with correct config, let's rely on standard practice.
-// For GH Pages without custom domain, it usually needs basename.
-// But wait, the user's vite config has base: '/ecoutemoi.fr/'.
-// Let's assume standard BrowserRouter needs basename.
-
 function App() {
   return (
-    <Router basename="/ecoutemoi.fr">
-      <ScrollToTop />
-      <div className="app-layout">
-        <Header />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Navigate to="/accueil" replace />} />
-            <Route path="/accueil" element={<Home />} />
-            <Route path="/comprendre" element={<Comprendre />} />
-            <Route path="/soutien-psy" element={<SoutienPsy />} />
-            <Route path="/urgence" element={<Urgence />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+    <HelmetProvider>
+      <Router basename="/ecoutemoi.fr">
+        <ScrollToTop />
+        <div className="app-layout">
+          <Header />
+          <main className="main-content">
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/accueil" replace />} />
+                <Route path="/accueil" element={<Home />} />
+                <Route path="/comprendre" element={<Comprendre />} />
+                <Route path="/soutien-psy" element={<SoutienPsy />} />
+                <Route path="/urgence" element={<Urgence />} />
+              </Routes>
+            </Suspense>
+          </main>
+          <Footer />
+        </div>
 
-      <style>{`
-                .app-layout {
-                    display: flex;
-                    flex-direction: column;
-                    min-height: 100vh;
-                }
-                .main-content {
-                    flex: 1;
-                }
-                
-                /* Global Animations */
-                .page-fade-in {
-                    animation: fadeInPage 0.4s ease-out;
-                }
-                @keyframes fadeInPage {
-                    from { opacity: 0; transform: translateY(10px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-            `}</style>
-    </Router>
+        <style>{`
+                    .app-layout {
+                        display: flex;
+                        flex-direction: column;
+                        min-height: 100vh;
+                    }
+                    .main-content {
+                        flex: 1;
+                    }
+                    
+                    /* Global Animations */
+                    .page-fade-in {
+                        animation: fadeInPage 0.4s ease-out;
+                    }
+                    @keyframes fadeInPage {
+                        from { opacity: 0; transform: translateY(10px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                `}</style>
+      </Router>
+    </HelmetProvider>
   );
 }
 

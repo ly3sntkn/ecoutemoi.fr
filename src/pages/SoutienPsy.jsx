@@ -1,9 +1,15 @@
+```javascript
 import React from 'react';
-import { HeartHandshake, Phone, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { HeartHandshake, Phone, ExternalLink, Info } from 'lucide-react';
 
 const SoutienPsy = () => {
     return (
         <div className="page-container page-fade-in">
+             <Helmet>
+                <title>Soutien Psychologique | Écoute Moi - Aide Gratuite</title>
+                <meta name="description" content="Besoin de parler ? Trouvez des professionnels de santé et des dispositifs d'écoute (Mon Soutien Psy, 3114, Fil Santé Jeunes)." />
+            </Helmet>
             <section className="section-header">
                 <div className="container">
                     <h1>Soutien Psychologique</h1>
@@ -62,79 +68,79 @@ const SoutienPsy = () => {
             </div>
 
             <style>{`
-                .page-container { padding-bottom: 4rem; }
-                .section-header {
-                    background: #eafaf1; /* Soft green tint */
-                    padding: 4rem 0 3rem;
-                    text-align: center;
-                    margin-bottom: 2rem;
-                }
-                .subtitle { color: #2d3436; font-size: 1.1rem; }
-                .content-wrapper {
-                    display: grid;
-                    gap: 2rem;
-                    max-width: 800px;
-                    margin: 0 auto;
-                }
+    .page - container { padding - bottom: 4rem; }
+                .section - header {
+    background: #eafaf1; /* Soft green tint */
+    padding: 4rem 0 3rem;
+    text - align: center;
+    margin - bottom: 2rem;
+}
+                .subtitle { color: #2d3436; font - size: 1.1rem; }
+                .content - wrapper {
+    display: grid;
+    gap: 2rem;
+    max - width: 800px;
+    margin: 0 auto;
+}
                 .card {
-                    background: white;
-                    padding: 2.5rem;
-                    border-radius: 16px;
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-                    border: 1px solid #f1f2f6;
-                    text-align: center;
-                }
-                .intro-card {
-                    background: #fff;
-                    border-left: 5px solid var(--color-primary);
-                }
-                .icon-large { color: var(--color-primary); margin-bottom: 1rem; }
+    background: white;
+    padding: 2.5rem;
+    border - radius: 16px;
+    box - shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #f1f2f6;
+    text - align: center;
+}
+                .intro - card {
+    background: #fff;
+    border - left: 5px solid var(--color - primary);
+}
+                .icon - large { color: var(--color - primary); margin - bottom: 1rem; }
                 
-                .action-card {
-                    background: #f8f9fa;
-                }
-                .btn-lg {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                    padding: 1rem 2rem;
-                    font-size: 1.1rem;
-                    margin: 1.5rem 0;
-                }
-                .text-link {
-                    color: #546e7a;
-                    text-decoration: underline;
-                    font-size: 0.9rem;
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 4px;
-                }
-                .text-link:hover { color: var(--color-primary); }
+                .action - card {
+    background: #f8f9fa;
+}
+                .btn - lg {
+    display: inline - flex;
+    align - items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font - size: 1.1rem;
+    margin: 1.5rem 0;
+}
+                .text - link {
+    color: #546e7a;
+    text - decoration: underline;
+    font - size: 0.9rem;
+    display: inline - flex;
+    align - items: center;
+    gap: 4px;
+}
+                .text - link:hover { color: var(--color - primary); }
 
-                .emergency-suicide {
-                    background: #fff0f0; /* Very light red */
-                    border: 2px solid #fab1a0;
-                    color: #c0392b;
-                }
-                .emergency-header {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 1rem;
-                    margin-bottom: 1rem;
-                }
-                .number-display {
-                    font-size: 3.5rem;
-                    font-weight: 800;
-                    margin: 0.5rem 0;
-                    color: #d63031;
-                }
-                .sub-text { font-size: 0.9rem; opacity: 0.9; }
+                .emergency - suicide {
+    background: #fff0f0; /* Very light red */
+    border: 2px solid #fab1a0;
+    color: #c0392b;
+}
+                .emergency - header {
+    display: flex;
+    align - items: center;
+    justify - content: center;
+    gap: 1rem;
+    margin - bottom: 1rem;
+}
+                .number - display {
+    font - size: 3.5rem;
+    font - weight: 800;
+    margin: 0.5rem 0;
+    color: #d63031;
+}
+                .sub - text { font - size: 0.9rem; opacity: 0.9; }
 
-                h2 { margin-bottom: 1rem; color: #2d3436; font-size: 1.5rem; }
-                p { line-height: 1.6; color: #636e72; }
-                .emergency-suicide p { color: #c0392b; }
-            `}</style>
+                h2 { margin - bottom: 1rem; color: #2d3436; font - size: 1.5rem; }
+                p { line - height: 1.6; color: #636e72; }
+                .emergency - suicide p { color: #c0392b; }
+`}</style>
         </div>
     );
 };

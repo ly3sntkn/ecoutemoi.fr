@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import Questionnaire from '../components/Questionnaire';
 import Violentometer from '../components/Violentometer';
 
@@ -46,6 +47,10 @@ const Comprendre = () => {
 
     return (
         <div className="page-container page-fade-in">
+            <Helmet>
+                <title>Comprendre & Evaluer | Écoute Moi</title>
+                <meta name="description" content="Évalue ta situation grâce au Questionnaire et au Violentomètre. Identifie si ta relation est saine, toxique ou dangereuse." />
+            </Helmet>
             <section className="section-header">
                 <div className="container">
                     <h1>Comprendre ce que tu vis</h1>
