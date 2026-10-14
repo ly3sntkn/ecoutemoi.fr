@@ -18,7 +18,7 @@ const Footer = () => {
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><Link to="#">Mentions Légales</Link></li>
+              <li><Link to="#">Fait par Amokrane Chala</Link></li>
               <li><a href="mailto:contact@ecoutemoi.fr" className="contact-link"><Mail size={14} /> Nous contacter</a></li>
             </ul>
           </div>
